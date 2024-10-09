@@ -1,0 +1,47 @@
+{
+  "name": "from-node-stream",
+  "version": "0.0.1",
+  "description": "convert nodejs-stream into webstream",
+  "keywords": [],
+  "homepage": "https://github.com/snomiao/from-node-stream#readme",
+  "bugs": {
+    "url": "https://github.com/snomiao/from-node-stream/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snomiao/from-node-stream.git"
+  },
+  "license": "MIT",
+  "author": "snomiao <snomiao@gmail.com>",
+  "type": "module",
+  "exports": {
+    "import": "./dist/index.js",
+    "types": "./index.ts"
+  },
+  "main": "index.js",
+  "module": "index.ts",
+  "types": "./index.ts",
+  "files": [
+    "*.ts",
+    "dist"
+  ],
+  "scripts": {
+    "build": "bun build:type && bun build:js",
+    "build:js": "bun build . --outdir=dist",
+    "build:type": "tsc -d --noEmit false --emitDeclarationOnly --outDir dist",
+    "prerelease": "bun run build && bun run test",
+    "release": "bunx standard-version && git push --follow-tags && npm publish",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "phpdie": "^1.2.12",
+    "sflow": "^1.16.23"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.11",
+    "@types/jest": "^29.5.13"
+  },
+  "peerDependencies": {
+    "typescript": "^5.6.3"
+  }
+}
