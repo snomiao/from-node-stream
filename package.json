@@ -35,7 +35,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "phpdie": "^1.2.12"
+    "phpdie": "^1.2.14"
   },
   "devDependencies": {
     "@types/bun": "^1.1.11",
