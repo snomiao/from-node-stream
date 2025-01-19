@@ -43,10 +43,8 @@ export function fromStdio(
     stdout?: Readable | null;
     stderr?: Readable | null;
   },
-  {
-    stderr = process.stderr,
-  }: {
-    // specify stderr to forward, or set to null to drop.
+  {    stderr,  }: {
+    /** specify stderr to forward, or set to null to drop. */
     stderr?: Writable | null;
   } = {}
 ): TransformStream<string | Uint8Array, string | Uint8Array> {
