@@ -1,6 +1,6 @@
 import DIE from "phpdie";
 import { mergeStream } from "sflow"; // TODO: tree shake sflow
-import { type Readable, type Writable } from "stream";
+import { Readable, Writable } from "stream";
 import { fromReadable } from "./fromReadable";
 import { fromWritable } from "./fromWritable";
 
@@ -34,5 +34,30 @@ export function fromStdioMergeError(
     writable: stdin,
     readable: mergeStream(stdout, stderr),
   };
+}
+
+export function fromStdio(
+  /** a process, which has stdin, stdout, stderr */
+  p: {
+    stdin?: Writable | null;
+    stdout?: Readable | null;
+    stderr?: Readable | null;
+  },
+  {
+    stderr = process.stderr,
+  }: {
+    // specify stderr to forward, or set to null to drop.
+    stderr?: Writable | null;
+  } = {}
+): TransformStream<string | Uint8Array, string | Uint8Array> {
+  if (p.stderr?.pipe && stderr?.pipe)
+    fromReadable(p.stderr).pipeTo(fromWritable(stderr), {
+      preventClose: true,
+    });
+  if (stderr === undefined) {
+    return fromStdioMergeError(p);
+  } else {
+    return fromStdioDropErr(p);
+  }
 }
 export { fromReadable, fromWritable };
