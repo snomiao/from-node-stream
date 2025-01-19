@@ -1,4 +1,4 @@
-# main
+# from-node-stream
 
 To install dependencies:
 
