@@ -35,3 +35,4 @@ export function fromStdioMergeError(
     readable: mergeStream(stdout, stderr),
   };
 }
+export { fromReadable, fromWritable };
