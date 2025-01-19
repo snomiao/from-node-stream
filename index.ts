@@ -43,7 +43,9 @@ export function fromStdio(
     stdout?: Readable | null;
     stderr?: Readable | null;
   },
-  {    stderr,  }: {
+  {
+    stderr,
+  }: {
     /** specify stderr to forward, or set to null to drop. */
     stderr?: Writable | null;
   } = {}
