@@ -1,4 +1,3 @@
-import DIE from "phpdie";
 import { mergeStream } from "sflow"; // TODO: tree shake sflow
 import { Readable, Writable } from "stream";
 import { fromReadable } from "./fromReadable";
@@ -13,8 +12,8 @@ export function fromStdioDropErr(
   }
 ): TransformStream<string | Uint8Array, string | Uint8Array> {
   return {
-    writable: fromWritable(p.stdin || DIE("Missing stdin")),
-    readable: fromReadable(p.stdout || DIE("Missing stdout")),
+    writable: fromWritable(p.stdin!),
+    readable: fromReadable(p.stdout!),
   };
 }
 
@@ -27,9 +26,9 @@ export function fromStdioMergeError(
     stderr?: Readable | null;
   }
 ): TransformStream<string | Uint8Array, string | Uint8Array> {
-  const stdin = fromWritable(p.stdin || DIE("Missing stdin"));
-  const stdout = fromReadable(p.stdout || DIE("Missing stdout"));
-  const stderr = fromReadable(p.stderr || DIE("Missing stderr"));
+  const stdin = fromWritable(p.stdin!);
+  const stdout = fromReadable(p.stdout!);
+  const stderr = fromReadable(p.stderr!);
   return {
     writable: stdin,
     readable: mergeStream(stdout, stderr),
