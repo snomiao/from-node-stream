@@ -22,7 +22,7 @@
   "license": "MIT",
   "author": "snomiao <snomiao@gmail.com>",
   "type": "module",
-"exports": {      
+  "exports": {
     "import": "./dist/index.js",
     "types": "./index.ts"
   },
@@ -35,7 +35,7 @@
   ],
   "scripts": {
     "build": "bun build:type && bun build:js",
-    "build:js": "bun build . --outdir=dist --sourcemap=external",
+    "build:js": "bun build . --outdir=dist --sourcemap=external --packages=external",
     "build:type": "tsc -d --noEmit false --emitDeclarationOnly --outDir dist",
     "prerelease": "bun run build && bun run test",
     "release": "bunx standard-version && git push --follow-tags && npm publish",
