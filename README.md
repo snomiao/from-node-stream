@@ -2,6 +2,22 @@
 
 ## Usage Examples
 
+### Stdio Passthrough Example
+
+Create a script that pipes process stdin through a bash process and then to stdout:
+
+```ts
+import { exec } from "child_process";
+import { fromStdio } from "from-node-stream";
+import { fromReadable } from "from-node-stream/fromReadable";
+import { fromWritable } from "from-node-stream/fromWritable";
+
+// Execute everything from stdin in bash and then output to stdout
+await fromReadable(process.stdin)
+  .pipeThrough(fromStdio(exec("bash")))
+  .pipeTo(fromWritable(process.stdout));
+```
+
 ### Basic: Read and Write from Node Streams
 
 ```ts
@@ -87,22 +103,6 @@ while (true) {
   if (done) break;
   output += typeof value === "string" ? value : new TextDecoder().decode(value);
 }
-```
-
-### Stdio Passthrough Example
-
-Create a script that pipes process stdin through a bash process and then to stdout:
-
-```ts
-import { exec } from "child_process";
-import { fromStdio } from "from-node-stream";
-import { fromReadable } from "from-node-stream/fromReadable";
-import { fromWritable } from "from-node-stream/fromWritable";
-
-// Execute everything from stdin in bash and then output to stdout
-await fromReadable(process.stdin)
-  .pipeThrough(fromStdio(exec("bash")))
-  .pipeTo(fromWritable(process.stdout));
 ```
 
 ## Development
