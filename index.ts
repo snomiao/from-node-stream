@@ -34,7 +34,9 @@ export function fromStdioMergeError(
     readable: mergeStream(stdout, stderr),
   };
 }
-
+/**
+ * Make TransformStream from stdio
+ */
 export function fromStdio(
   /** a process, which has stdin, stdout, stderr */
   p: {
