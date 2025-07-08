@@ -1,5 +1,11 @@
 import type { Writable } from "stream";
 
+/**
+ * Converts a Node.js Writable stream to a Web API WritableStream
+ * @template T - The type of data being written (string or Uint8Array)
+ * @param i - The Node.js writable stream to convert
+ * @returns A Web API WritableStream that wraps the Node.js stream
+ */
 export function fromWritable<T extends string | Uint8Array>(
   i: Writable | NodeJS.WritableStream
 ): WritableStream<T> {
