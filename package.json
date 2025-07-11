@@ -40,16 +40,15 @@
     "test": "bun test",
     "prepare": "husky"
   },
-  "dependencies": {
-    "phpdie": "^1.2.14"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "phpdie": "^1.2.14",
     "@types/bun": "^1.1.11",
     "@types/jest": "^29.5.13",
     "@types/node": "^22.10.7",
     "husky": "^9.1.7",
     "semantic-release": "^24.2.1",
-    "sflow": "^1.19.1",
+    "sflow": "^1.21.0",
     "typescript": "^5.6.3"
   }
 }
