@@ -10,7 +10,7 @@ import { fromWritable } from "./fromWritable";
  * @param p - A process object with stdin, stdout, and stderr streams
  * @returns A TransformStream that connects stdin to stdout, ignoring stderr
  */
-export function fromStdioDropErr<IN extends string|Uint8Array, OUT extends string|Uint8Array>(
+export function fromStdioDropErr<IN extends string | Uint8Array, OUT extends string | Uint8Array>(
   /** a process, which has stdin, stdout, stderr */
   p: {
     stdin?: Writable | null;
@@ -31,7 +31,7 @@ export function fromStdioDropErr<IN extends string|Uint8Array, OUT extends strin
  * @param p - A process object with stdin, stdout, and stderr streams
  * @returns A TransformStream that connects stdin to a merged stdout+stderr stream
  */
-export function fromStdioMergeError<IN extends string|Uint8Array, OUT extends string|Uint8Array>(
+export function fromStdioMergeError<IN extends string | Uint8Array, OUT extends string | Uint8Array>(
   /** a process, which has stdin, stdout, stderr */
   p: {
     stdin?: Writable | null;
@@ -57,7 +57,7 @@ export function fromStdioMergeError<IN extends string|Uint8Array, OUT extends st
  * @param options.stderr - The writable stream to forward stderr to
  * @returns A TransformStream that connects stdin to stdout, forwarding stderr separately
  */
-export function fromStdioAndForwardError<IN extends string|Uint8Array, OUT extends string|Uint8Array>(
+export function fromStdioAndForwardError<IN extends string | Uint8Array, OUT extends string | Uint8Array>(
   /** a process, which has stdin, stdout, stderr */
   p: {
     stdin?: Writable | null;
@@ -86,7 +86,7 @@ export function fromStdioAndForwardError<IN extends string|Uint8Array, OUT exten
  * @param options.stderr - Writable stream to forward stderr to, or null to drop stderr, or undefined to merge with stdout
  * @returns A TransformStream that connects stdin to stdout with the specified stderr behavior
  */
-export function fromStdio<IN extends string|Uint8Array, OUT extends string|Uint8Array>(
+export function fromStdio<IN extends string | Uint8Array, OUT extends string | Uint8Array>(
   /** a process, which has stdin, stdout, stderr */
   p: {
     stdin?: Writable | null;
