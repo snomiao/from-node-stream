@@ -13,9 +13,9 @@ import { fromWritable } from "./fromWritable";
 export function fromStdioDropErr<IN extends string | Uint8Array, OUT extends string | Uint8Array>(
   /** a process, which has stdin, stdout, stderr */
   p: {
-    stdin?: Writable | null;
-    stdout?: Readable | null;
-    stderr?: Readable | null;
+    stdin?: Writable | WritableStream | null;
+    stdout?: Readable | ReadableStream | null;
+    stderr?: Readable | ReadableStream | null;
   }
 ): TransformStream<IN, OUT> {
   return {
@@ -34,9 +34,9 @@ export function fromStdioDropErr<IN extends string | Uint8Array, OUT extends str
 export function fromStdioMergeError<IN extends string | Uint8Array, OUT extends string | Uint8Array>(
   /** a process, which has stdin, stdout, stderr */
   p: {
-    stdin?: Writable | null;
-    stdout?: Readable | null;
-    stderr?: Readable | null;
+    stdin?: Writable | WritableStream | null;
+    stdout?: Readable | ReadableStream | null;
+    stderr?: Readable | ReadableStream | null;
   }
 ): TransformStream<IN, OUT> {
   const stdin = fromWritable<IN>(p.stdin!);
@@ -60,17 +60,17 @@ export function fromStdioMergeError<IN extends string | Uint8Array, OUT extends 
 export function fromStdioAndForwardError<IN extends string | Uint8Array, OUT extends string | Uint8Array>(
   /** a process, which has stdin, stdout, stderr */
   p: {
-    stdin?: Writable | null;
-    stdout?: Readable | null;
-    stderr?: Readable | null;
+    stdin?: Writable | WritableStream | null;
+    stdout?: Readable | ReadableStream | null;
+    stderr?: Readable | ReadableStream | null;
   },
   { stderr }: {
-    stderr: Writable
+    stderr: Writable | WritableStream
   }
 ): TransformStream<IN, OUT> {
   const stdin = fromWritable<IN>(p.stdin!);
   const stdout = fromReadable<OUT>(p.stdout!);
-  if (p.stderr?.pipe)
+  if (p.stderr)
     fromReadable(p.stderr).pipeTo(fromWritable(stderr));
   return {
     writable: stdin, readable: stdout,
@@ -89,15 +89,15 @@ export function fromStdioAndForwardError<IN extends string | Uint8Array, OUT ext
 export function fromStdio<IN extends string | Uint8Array, OUT extends string | Uint8Array>(
   /** a process, which has stdin, stdout, stderr */
   p: {
-    stdin?: Writable | null;
-    stdout?: Readable | null;
-    stderr?: Readable | null;
+    stdin?: Writable | WritableStream | null;
+    stdout?: Readable | ReadableStream | null;
+    stderr?: Readable | ReadableStream | null;
   },
   {
     stderr,
   }: {
     /** specify stderr to forward, or set to null to drop. */
-    stderr?: Writable | null;
+    stderr?: Writable | WritableStream | null;
   } = {}
 ): TransformStream<IN, OUT> {
   if (stderr === undefined) {
@@ -107,7 +107,7 @@ export function fromStdio<IN extends string | Uint8Array, OUT extends string | U
     return fromStdioDropErr(p);
   } else {
     // forward stderr if stderr is specified
-    if (p.stderr?.pipe)
+    if (p.stderr)
       fromReadable(p.stderr).pipeTo(fromWritable(stderr));
     return fromStdioDropErr(p);
   }

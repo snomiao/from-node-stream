@@ -7,8 +7,9 @@ import type { Writable } from "stream";
  * @returns A Web API WritableStream that wraps the Node.js stream
  */
 export function fromWritable<T extends string | Uint8Array>(
-  i: Writable | NodeJS.WritableStream
+  i: Writable | NodeJS.WritableStream | WritableStream
 ): WritableStream<T> {
+  if(i instanceof WritableStream) return i
   return new WritableStream({
     start: (c) => (i.on("error", (err) => c.error(err)), undefined),
     abort: (reason) => (

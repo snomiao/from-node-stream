@@ -7,8 +7,9 @@ import type { Readable } from "stream";
  * @returns A Web API ReadableStream that wraps the Node.js stream
  */
 export function fromReadable<T extends string | Uint8Array>(
-  i: Readable | NodeJS.ReadableStream
+  i: Readable | NodeJS.ReadableStream | ReadableStream
 ): ReadableStream<T> {
+  if (i instanceof ReadableStream) return i
   return new ReadableStream({
     start: (c) => {
       i.on("data", (data) => c.enqueue(data));
