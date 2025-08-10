@@ -7,9 +7,10 @@
     "node-stream",
     "Readable",
     "Writable",
+    "Duplex",
     "ReadableStream",
     "WritableStream",
-    "TransformSteam"
+    "TransformStream"
   ],
   "homepage": "https://github.com/snomiao/from-node-stream#readme",
   "bugs": {
