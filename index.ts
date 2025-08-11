@@ -2,6 +2,7 @@ import { mergeStream } from "sflow"; // TODO: ensure tree shake sflow
 import { Readable, Writable } from "stream";
 import { fromReadable } from "./fromReadable";
 import { fromWritable } from "./fromWritable";
+import { fromDuplex } from "./fromDuplex";
 
 /**
  * Creates a TransformStream from a process's stdio, dropping stderr output
@@ -114,4 +115,4 @@ export function fromStdio<IN extends string | Uint8Array, OUT extends string | U
 
 }
 
-export { fromReadable, fromWritable };
+export { fromReadable, fromWritable, fromDuplex };
