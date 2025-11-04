@@ -1,4 +1,33 @@
-import { mergeStream } from "sflow"; // TODO: ensure tree shake sflow
+// Native implementation to replace sflow mergeStream
+function mergeStream<T>(...streams: ReadableStream<T>[]): ReadableStream<T> {
+  return new ReadableStream<T>({
+    start(controller) {
+      let activeStreams = streams.length;
+
+      streams.forEach(async (stream) => {
+        try {
+          const reader = stream.getReader();
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            controller.enqueue(value);
+          }
+
+          reader.releaseLock();
+        } catch (error) {
+          controller.error(error);
+          return;
+        } finally {
+          activeStreams--;
+          if (activeStreams === 0) {
+            controller.close();
+          }
+        }
+      });
+    }
+  });
+}
 import { Readable, Writable } from "stream";
 import { fromReadable } from "./fromReadable";
 import { fromWritable } from "./fromWritable";

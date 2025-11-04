@@ -1,6 +1,6 @@
 import { exec } from "child_process";
 import { Transform } from "stream";
-import sflow from "sflow";
+import sflow from "./test-utils";
 import { fromStdioDropErr, fromStdioMergeError } from ".";
 import { fromDuplex } from "./fromDuplex";
 import { fromReadable } from "./fromReadable";
