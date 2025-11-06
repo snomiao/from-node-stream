@@ -1,6 +1,6 @@
 {
   "name": "from-node-stream",
-  "version": "0.0.1",
+  "version": "0.1.2",
   "description": "convert nodejs-stream into webstream",
   "keywords": [
     "WebStream",
@@ -13,7 +13,7 @@
     "TransformStream"
   ],
   "homepage": "https://github.com/snomiao/from-node-stream#readme",
-  "bugs": { 
+  "bugs": {
     "url": "https://github.com/snomiao/from-node-stream/issues"
   },
   "repository": {
