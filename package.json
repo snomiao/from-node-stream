@@ -28,7 +28,7 @@
     "types": "./ts/index.ts"
   },
   "main": "dist/index.js",
-  "module": "ts/index.ts",
+  "module": "dist/index.js",
   "types": "./ts/index.ts",
   "files": [
     "*.ts",
