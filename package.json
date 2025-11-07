@@ -25,11 +25,11 @@
   "type": "module",
   "exports": {
     "import": "./dist/index.js",
-    "types": "./index.ts"
+    "types": "./ts/index.ts"
   },
-  "main": "index.js",
-  "module": "index.ts",
-  "types": "./index.ts",
+  "main": "dist/index.js",
+  "module": "ts/index.ts",
+  "types": "./ts/index.ts",
   "files": [
     "*.ts",
     "dist"
