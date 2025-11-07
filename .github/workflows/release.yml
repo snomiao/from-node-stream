@@ -5,7 +5,7 @@ permissions:
   issues: write
   id-token: write
 jobs:
-  semantic-release:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
