@@ -16,8 +16,8 @@ jobs:
         #[semantic-release]: node version >=20.8.1 is required. Found v18.20.5.
       - uses: oven-sh/setup-bun@v2
       - run: bun i
-      - run: bun run test
       - run: bun run build
+      - run: bun run test
       - run: npx semantic-release
         env:
           # reminder to setup read/write permission for this token
