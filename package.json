@@ -35,7 +35,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "bun build ./index.ts --outdir=dist --sourcemap=external",
+    "build": "bun build ./ts/index.ts --outdir=dist --sourcemap=external",
     "prerelease": "bun run build && bun run test",
     "release": "bunx standard-version && git push --follow-tags && npm publish",
     "test": "bun test",
