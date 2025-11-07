@@ -10,8 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v6
-        with:
-          registry-url: 'https://registry.npmjs.org'
       - uses: oven-sh/setup-bun@v2
       - run: bun i
       - run: bun run build
@@ -21,4 +19,5 @@ jobs:
           # reminder to setup read/write permission for this token
           # here: REPO_URL/settings/actions
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
