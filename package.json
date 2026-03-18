@@ -24,33 +24,35 @@
   "author": "snomiao <snomiao@gmail.com>",
   "type": "module",
   "exports": {
-    "import": "./dist/index.js",
+    "import": "./dist/index.mjs",
     "types": "./ts/index.ts"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/index.mjs",
+  "module": "dist/index.mjs",
   "types": "./ts/index.ts",
   "files": [
     "ts",
     "dist"
   ],
   "scripts": {
-    "build": "bun build ./ts/index.ts --outdir=dist --sourcemap=external",
-    "typecheck": "tsc --noEmit",
+    "build": "tsdown ts/index.ts --format esm --sourcemap",
+    "typecheck": "tsgo --noEmit",
     "prerelease": "bun run build && bun run test",
     "release": "bunx standard-version && git push --follow-tags && npm publish",
     "test": "bun test",
     "prepublishOnly": "bun run build && bun run test",
-    "prepare": "husky"
+    "prepare": "husky",
+    "dev": "tsdown ts/index.ts --format esm --watch"
   },
-  "dependencies": {},
   "devDependencies": {
-    "phpdie": "^1.2.14",
-    "@types/bun": "^1.1.11",
-    "@types/jest": "^29.5.13",
-    "@types/node": "^22.10.7",
+    "@types/bun": "^1.3.11",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.5.0",
+    "@typescript/native-preview": "^7.0.0-dev.20260318.1",
     "husky": "^9.1.7",
-    "semantic-release": "^24.2.1",
-    "typescript": "^5.6.3"
+    "phpdie": "^1.7.0",
+    "semantic-release": "^25.0.3",
+    "tsdown": "^0.21.4",
+    "typescript": "^5.9.3"
   }
 }

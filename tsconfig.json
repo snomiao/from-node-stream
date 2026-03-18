@@ -17,6 +17,7 @@
     // Best practices
     "strict": true,
     "skipLibCheck": true,
+    "types": ["node", "bun"],
     "noFallthroughCasesInSwitch": true,
     
     // Some stricter flags (disabled by default)
@@ -24,5 +25,6 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
-      }
+  },
+  "exclude": ["examples", "**/*.spec.ts"]
 }
