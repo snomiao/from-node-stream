@@ -10,14 +10,15 @@ export function fromReadable<T extends string | Uint8Array>(
   i: Readable | NodeJS.ReadableStream | ReadableStream
 ): ReadableStream<T> {
   if (i instanceof ReadableStream) return i
+  const stream = i as Readable;
   return new ReadableStream({
     start: (c) => {
-      i.on("data", (data) => c.enqueue(data));
-      i.on("close", () => c.close());
-      i.on("error", (err) => c.error(err));
+      stream.on("data", (data: T) => c.enqueue(data));
+      stream.on("close", () => c.close());
+      stream.on("error", (err: Error) => c.error(err));
     },
     cancel: (reason) => (
-      (i as Partial<Readable> & Partial<NodeJS.ReadableStream>).destroy?.(
+      (stream as Partial<Readable> & Partial<NodeJS.ReadableStream>).destroy?.(
         reason
       ),
       undefined

@@ -10,15 +10,16 @@ export function fromWritable<T extends string | Uint8Array>(
   i: Writable | NodeJS.WritableStream | WritableStream
 ): WritableStream<T> {
   if(i instanceof WritableStream) return i
+  const stream = i as Writable;
   return new WritableStream({
-    start: (c) => (i.on("error", (err) => c.error(err)), undefined),
+    start: (c) => (stream.on("error", (err: Error) => c.error(err)), undefined),
     abort: (reason) => (
-      (i as Partial<Writable> & Partial<NodeJS.WritableStream>).destroy?.(
+      (stream as Partial<Writable> & Partial<NodeJS.WritableStream>).destroy?.(
         reason
       ),
       undefined
     ),
-    write: (data: string | Uint8Array, c) => (i.write(data), undefined),
-    close: () => (i.end(), undefined),
+    write: (data: string | Uint8Array, c) => (stream.write(data), undefined),
+    close: () => (stream.end(), undefined),
   });
 }
