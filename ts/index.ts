@@ -1,3 +1,8 @@
+import type { Readable, Writable } from "stream";
+import { fromReadable } from "./fromReadable.ts";
+import { fromWritable } from "./fromWritable.ts";
+import { fromDuplex } from "./fromDuplex.ts";
+
 // Native implementation to replace sflow mergeStream
 function mergeStream<T>(...streams: ReadableStream<T>[]): ReadableStream<T> {
   return new ReadableStream<T>({
@@ -28,10 +33,6 @@ function mergeStream<T>(...streams: ReadableStream<T>[]): ReadableStream<T> {
     }
   });
 }
-import { Readable, Writable } from "stream";
-import { fromReadable } from "./fromReadable";
-import { fromWritable } from "./fromWritable";
-import { fromDuplex } from "./fromDuplex";
 
 /**
  * Creates a TransformStream from a process's stdio, dropping stderr output

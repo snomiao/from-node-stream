@@ -12,6 +12,7 @@ jobs:
       - uses: actions/setup-node@v6
       - uses: oven-sh/setup-bun@v2
       - run: bun i
+      - run: bun run typecheck
       - run: bun run build
       - run: bun run test
       - run: bunx semantic-release

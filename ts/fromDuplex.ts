@@ -1,6 +1,6 @@
 import type { Duplex } from "stream";
-import { fromReadable } from "./fromReadable";
-import { fromWritable } from "./fromWritable";
+import { fromReadable } from "./fromReadable.ts";
+import { fromWritable } from "./fromWritable.ts";
 
 /**
  * Converts a Node.js Duplex stream to a Web API TransformStream

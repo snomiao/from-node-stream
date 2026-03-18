@@ -31,14 +31,16 @@
   "module": "dist/index.js",
   "types": "./ts/index.ts",
   "files": [
-    "*.ts",
+    "ts",
     "dist"
   ],
   "scripts": {
     "build": "bun build ./ts/index.ts --outdir=dist --sourcemap=external",
+    "typecheck": "tsc --noEmit",
     "prerelease": "bun run build && bun run test",
     "release": "bunx standard-version && git push --follow-tags && npm publish",
     "test": "bun test",
+    "prepublishOnly": "bun run build && bun run test",
     "prepare": "husky"
   },
   "dependencies": {},

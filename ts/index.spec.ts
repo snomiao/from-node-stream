@@ -1,10 +1,10 @@
 import { exec } from "child_process";
 import { Transform } from "stream";
-import sflow from "./test-utils";
-import { fromStdioDropErr, fromStdioMergeError } from ".";
-import { fromDuplex } from "./fromDuplex";
-import { fromReadable } from "./fromReadable";
-import { fromWritable } from "./fromWritable";
+import sflow from "./test-utils.ts";
+import { fromStdioDropErr, fromStdioMergeError } from "./index.ts";
+import { fromDuplex } from "./fromDuplex.ts";
+import { fromReadable } from "./fromReadable.ts";
+import { fromWritable } from "./fromWritable.ts";
 
 it("from node streams, read + write", async () => {
   // sh instance
